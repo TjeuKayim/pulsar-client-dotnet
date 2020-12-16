@@ -215,7 +215,12 @@ type MessageId =
                             else
                                 -1
                         else
-                            -1
+                            // this Individual, other Cumulative(0,null)
+                            // https://github.com/apache/pulsar/blob/cb6617fa02d235f341026adf43fee87627a20c8b/pulsar-client/src/main/java/org/apache/pulsar/client/impl/MessageIdImpl.java#L215-L219
+                            match other.Type with
+                            | Cumulative (batchIndex, _) when %batchIndex > 0 -> -1
+                            | _ -> 0
+
                     else
                         -1
                 else
