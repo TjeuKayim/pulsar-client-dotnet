@@ -224,7 +224,7 @@ let tests =
                 client.NewProducer()
                     .Topic(topicName)
                     .ProducerName(producerName)
-                    .EnableBatching(false)
+                    .EnableBatching(true)
                     .CreateAsync() |> Async.AwaitTask
 
             let! messageId = producer.SendAsync("Hello world1" |> Encoding.UTF8.GetBytes) |> Async.AwaitTask
