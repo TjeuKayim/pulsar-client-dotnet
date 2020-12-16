@@ -205,15 +205,10 @@ type MessageId =
                     if this.EntryId > other.EntryId then
                         1
                     elif this.EntryId = other.EntryId then
-                        if this.Type > other.Type then
+                        if this.Partition > other.Partition then
                             1
-                        elif this.Type = other.Type then
-                            if this.Partition > other.Partition then
-                                1
-                            elif this.Partition = other.Partition then
-                                0
-                            else
-                                -1
+                        elif this.Partition = other.Partition then
+                            0
                         else
                             -1
                     else
