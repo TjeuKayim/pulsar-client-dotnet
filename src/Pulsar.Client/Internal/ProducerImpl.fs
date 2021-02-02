@@ -228,7 +228,7 @@ type internal ProducerImpl<'T> private (producerConfig: ProducerConfiguration, c
         let metadata =
             MessageMetadata (
                 SequenceId = (sequenceId |> uint64),
-                PublishTime = (DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() |> uint64),
+                PublishTime = (DateTime.UtcNow |> convertToMsTimestamp |> uint64),
                 ProducerName = producerConfig.ProducerName,
                 UncompressedSize = (message.Payload.Length |> uint32)
             )
