@@ -73,14 +73,11 @@ let (|Flatten|) (ex: exn) =
 
 // DateTime conversions
 
-let UTC_EPOCH = DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)
-let convertToMsTimestamp dateTime =
-    let elapsed = dateTime - UTC_EPOCH
-    elapsed.TotalMilliseconds |> int64
+let convertToMsTimestamp (dateTime: DateTime) =
+    DateTimeOffset(dateTime).ToUnixTimeMilliseconds()
 
 let convertToDateTime (msTimestamp: int64) =
-    let ms = msTimestamp |> float
-    UTC_EPOCH.AddMilliseconds ms
+    DateTimeOffset.FromUnixTimeMilliseconds(msTimestamp).UtcDateTime
 
 // Mix
 
